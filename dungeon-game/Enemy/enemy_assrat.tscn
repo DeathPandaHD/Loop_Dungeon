@@ -1,12 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://couwl5ufthuij"]
+[gd_scene load_steps=7 format=3 uid="uid://couwl5ufthuij"]
 
 [ext_resource type="PackedScene" uid="uid://6jax1aohw5vj" path="res://Utilities/entities/Enemybase.tscn" id="1_j7sqk"]
 [ext_resource type="Script" uid="uid://davpil05xgd2y" path="res://Enemy/enemy_assrat.gd" id="2_i1fak"]
 [ext_resource type="Texture2D" uid="uid://bphrlyunli0uu" path="res://Textures/Enemies-Texture/Assrat.png" id="3_i1fak"]
-[ext_resource type="PackedScene" uid="uid://cgjqwdt66mdxm" path="res://Utilities/hit_box.tscn" id="4_kywfv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qbsmd"]
 height = 24.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i1fak"]
+radius = 13.0164
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qbsmd"]
 
 [node name="enemy_Assrat" instance=ExtResource("1_j7sqk")]
 scale = Vector2(1.385, 1.385)
@@ -23,21 +27,21 @@ hframes = 2
 position = Vector2(0, 4)
 shape = SubResource("CapsuleShape2D_qbsmd")
 
-[node name="Hit_box" parent="." index="3" instance=ExtResource("4_kywfv")]
-position = Vector2(0, 2.16606)
-collision_layer = 4
-collision_mask = 2
-damage = 50
-
-[node name="CollisionShape2D" parent="Hit_box" index="0"]
-position = Vector2(0, 0.722022)
-
-[node name="Hurt_box" parent="." index="4"]
+[node name="Hit_box" parent="." index="3"]
 collision_layer = 4
 collision_mask = 8
 
+[node name="CollisionShape2D" parent="Hit_box" index="0"]
+position = Vector2(-0.722022, 3.61011)
+shape = SubResource("CircleShape2D_i1fak")
+
+[node name="Hurt_box" parent="." index="4"]
+collision_layer = 4
+collision_mask = 2
+
 [node name="CollisionShape2D" parent="Hurt_box" index="0"]
-position = Vector2(0, 2.16606)
+position = Vector2(0, 5.05415)
+shape = SubResource("CircleShape2D_qbsmd")
 
 [editable path="Hit_box"]
 [editable path="Hurt_box"]

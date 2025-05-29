@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=4 uid="uid://ddhqab5k68b3p"]
+[gd_scene load_steps=10 format=4 uid="uid://ddhqab5k68b3p"]
 
 [ext_resource type="Texture2D" uid="uid://c1sg44duem0p" path="res://Textures/Tilemap-Texture/Temp Tilemap/Map01.png" id="1_3jqqs"]
 [ext_resource type="Texture2D" uid="uid://co4qv7mpvfhi1" path="res://Textures/Tilemap-Texture/Floor Tilemaps/lowest_floors_tileset_1.png" id="2_o1cuu"]
 [ext_resource type="Texture2D" uid="uid://cgheviumtyhbh" path="res://Textures/UI-Texture/Pixel Heart Sprite Sheet 16x16.png" id="4_epbeg"]
 [ext_resource type="PackedScene" uid="uid://c5u8jtl7qyrag" path="res://Player/player_mirai.tscn" id="4_kdumj"]
 [ext_resource type="PackedScene" uid="uid://couwl5ufthuij" path="res://Enemy/enemy_assrat.tscn" id="5_kdumj"]
+[ext_resource type="PackedScene" uid="uid://6a3sdhveh6ha" path="res://Enemy/molemonster.tscn" id="5_w6ms7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y4156"]
 texture = ExtResource("1_3jqqs")
@@ -228,11 +229,13 @@ layout_mode = 2
 texture = ExtResource("4_epbeg")
 expand_mode = 2
 
-[node name="Player_Mirai" parent="." instance=ExtResource("4_kdumj")]
-collision_layer = 1
-hp = 100
-
 [node name="Enemys" type="Node" parent="."]
 
 [node name="enemy_Assrat" parent="Enemys" instance=ExtResource("5_kdumj")]
-position = Vector2(779, 295)
+position = Vector2(357, 411)
+
+[node name="Enemybase" parent="Enemys" instance=ExtResource("5_w6ms7")]
+position = Vector2(287, 287)
+
+[node name="Player_Mirai" parent="." instance=ExtResource("4_kdumj")]
+position = Vector2(46.8384, 8.29268)

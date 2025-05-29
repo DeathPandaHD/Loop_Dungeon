@@ -1,5 +1,5 @@
 extends CharacterBody2D
-signal hp_changed(new_hp)
+signal hp_changed()
 @export var move_speed = 20.0
 @export var hp_max = 100
 @export var hp = hp_max

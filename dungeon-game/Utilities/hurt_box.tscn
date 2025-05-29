@@ -1,12 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cswohpshqxvix"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7ql65"]
-radius = 9.0
-height = 32.0
+[gd_scene format=3 uid="uid://cswohpshqxvix"]
 
 [node name="Hurt_box" type="Area2D"]
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_7ql65")
 debug_color = Color(0.995998, 0, 0.195104, 0.42)

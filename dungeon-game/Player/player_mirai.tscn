@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c5u8jtl7qyrag"]
+[gd_scene load_steps=13 format=3 uid="uid://c5u8jtl7qyrag"]
 
 [ext_resource type="PackedScene" uid="uid://bs2foaj73hr8m" path="res://Utilities/entities/playerbase.tscn" id="1_3lch6"]
 [ext_resource type="Texture2D" uid="uid://uyonbibxntoy" path="res://Textures/Player-Texture/mirai 5-20.png" id="2_wpdwc"]
@@ -112,6 +112,8 @@ _data = {
 &"Walk_up": SubResource("Animation_0gsqq")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_52yw7"]
+
 [node name="Player_Mirai" instance=ExtResource("1_3lch6")]
 move_speed = 120.0
 
@@ -133,9 +135,16 @@ libraries = {
 [node name="animation system" type="Node" parent="." index="3"]
 script = ExtResource("3_rcv0h")
 
-[node name="Hurt_box" parent="." index="4"]
-position = Vector2(1, 8)
+[node name="CollisionShape2D" parent="Hit_box" index="0"]
+position = Vector2(0, 9)
+
+[node name="Hurt_box" parent="." index="5"]
 collision_layer = 2
 collision_mask = 4
 
+[node name="CollisionShape2D" parent="Hurt_box" index="0"]
+position = Vector2(1, 9)
+shape = SubResource("CapsuleShape2D_52yw7")
+
+[editable path="Hit_box"]
 [editable path="Hurt_box"]
