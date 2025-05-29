@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bs2foaj73hr8m"]
+
+[ext_resource type="PackedScene" uid="uid://bi0441r5vuhdg" path="res://Utilities/entities/entityBase.tscn" id="1_34jtg"]
+[ext_resource type="Script" uid="uid://c0cuy3txmynhd" path="res://Utilities/entities/playerbase.gd" id="2_h2jg2"]
+
+[node name="playerbase" groups=["player"] instance=ExtResource("1_34jtg")]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("2_h2jg2")

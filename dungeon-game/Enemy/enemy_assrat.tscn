@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://couwl5ufthuij"]
+
+[ext_resource type="PackedScene" uid="uid://6jax1aohw5vj" path="res://Utilities/entities/Enemybase.tscn" id="1_j7sqk"]
+[ext_resource type="Script" uid="uid://davpil05xgd2y" path="res://Enemy/enemy_assrat.gd" id="2_i1fak"]
+[ext_resource type="Texture2D" uid="uid://bphrlyunli0uu" path="res://Textures/Enemies-Texture/Assrat.png" id="3_i1fak"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qbsmd"]
+height = 24.0
+
+[node name="enemy_Assrat" instance=ExtResource("1_j7sqk")]
+scale = Vector2(1.385, 1.385)
+script = ExtResource("2_i1fak")
+
+[node name="Sprite2D" parent="." index="0"]
+texture_filter = 1
+texture = ExtResource("3_i1fak")
+hframes = 2
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, 4)
+shape = SubResource("CapsuleShape2D_qbsmd")

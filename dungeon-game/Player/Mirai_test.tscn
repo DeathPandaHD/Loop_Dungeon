@@ -1,0 +1,152 @@
+[gd_scene load_steps=13 format=3 uid="uid://cqv2iafphtrox"]
+
+[ext_resource type="Script" uid="uid://vbkflcoy4tyx" path="res://Player/character_body_2d.gd" id="1_hupbs"]
+[ext_resource type="Script" uid="uid://ccfam71ah0mmd" path="res://Player/animation_system.gd" id="2_2o8sy"]
+[ext_resource type="Texture2D" uid="uid://uyonbibxntoy" path="res://Textures/Player-Texture/mirai 5-20.png" id="2_6m13i"]
+[ext_resource type="PackedScene" uid="uid://cswohpshqxvix" path="res://Utilities/hurt_box.tscn" id="4_h0nin"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1j6re"]
+radius = 9.0
+height = 32.0
+
+[sub_resource type="Animation" id="Animation_2o8sy"]
+resource_name = "Idle"
+length = 1.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.7, 0.966667, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 2, 3, 0]
+}
+
+[sub_resource type="Animation" id="Animation_wg400"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_h0nin"]
+resource_name = "Walk_down"
+length = 0.6505
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 7, 8, 9, 10]
+}
+
+[sub_resource type="Animation" id="Animation_1j6re"]
+resource_name = "Walk_left"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [14]
+}
+
+[sub_resource type="Animation" id="Animation_8xnt8"]
+resource_name = "Walk_right"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [13]
+}
+
+[sub_resource type="Animation" id="Animation_uqivt"]
+resource_name = "Walk_up"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [12]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uqivt"]
+_data = {
+&"Idle": SubResource("Animation_2o8sy"),
+&"RESET": SubResource("Animation_wg400"),
+&"Walk_down": SubResource("Animation_h0nin"),
+&"Walk_left": SubResource("Animation_1j6re"),
+&"Walk_right": SubResource("Animation_8xnt8"),
+&"Walk_up": SubResource("Animation_uqivt")
+}
+
+[node name="player" type="CharacterBody2D" groups=["player"]]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_hupbs")
+move_speed = 75.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(4.5, -9)
+scale = Vector2(1.28125, 1.28125)
+texture = ExtResource("2_6m13i")
+hframes = 4
+vframes = 4
+
+[node name="bodyshape" type="CollisionShape2D" parent="."]
+position = Vector2(5, 6)
+shape = SubResource("CapsuleShape2D_1j6re")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
+libraries = {
+&"": SubResource("AnimationLibrary_uqivt")
+}
+
+[node name="Animation system" type="Node" parent="."]
+script = ExtResource("2_2o8sy")
+
+[node name="Hurt_box" parent="." instance=ExtResource("4_h0nin")]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" parent="Hurt_box" index="0"]
+position = Vector2(5, 6)
+
+[connection signal="area_entered" from="Hurt_box" to="." method="_on_hurt_box_area_entered"]
+
+[editable path="Hurt_box"]
