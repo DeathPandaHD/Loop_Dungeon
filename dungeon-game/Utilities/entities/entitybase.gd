@@ -1,7 +1,7 @@
 extends CharacterBody2D
-
+signal hp_changed(new_hp)
 @export var move_speed = 20.0
-@export var hp_max = 100 
+@export var hp_max = 100
 @export var hp = hp_max
 var direction : Vector2
 @export var speed = 75
@@ -17,6 +17,7 @@ func move():
 	direction = direction.normalized()
 	velocity = direction *  move_speed
 	move_and_slide()
+
 func die():
 	queue_free() 
 	
@@ -25,8 +26,13 @@ func receive_damage(base_damage):
 		self.hp -= actual_damage
 		print(name + " received " +str(actual_damage) + " Damage ")
 		print(name + " players new health "+ str(hp))
+
 #detects if hitbox is touching hurtbox
 func _on_hurt_box_area_entered(hitbox):
 	receive_damage(hitbox.damage)
-	var base_damage= hitbox.damage
-	print(hitbox.get_parent().name + "'s hitbox touched" + name + "'s hurtbox touched " +str(base_damage))
+	if hp < 0:
+		
+	#fully heals player on death
+		hp = hp_max
+		print("full heal " +str(hp))
+	
