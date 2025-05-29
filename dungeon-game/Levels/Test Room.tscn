@@ -229,8 +229,7 @@ expand_mode = 2
 
 [node name="Player_Mirai" parent="." instance=ExtResource("4_kdumj")]
 collision_layer = 1
-collision_mask = 1
-move_speed = 92.32
+hp = 100
 
 [node name="Enemys" type="Node" parent="."]
 

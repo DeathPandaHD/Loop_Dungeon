@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bi0441r5vuhdg"]
+[gd_scene load_steps=3 format=3 uid="uid://bi0441r5vuhdg"]
 
 [ext_resource type="Script" uid="uid://txn0dclmmdva" path="res://Utilities/entities/entitybase.gd" id="1_wm20p"]
+[ext_resource type="PackedScene" uid="uid://cswohpshqxvix" path="res://Utilities/hurt_box.tscn" id="3_d5byr"]
 
 [node name="EntityBase" type="CharacterBody2D"]
 script = ExtResource("1_wm20p")
@@ -10,3 +11,11 @@ script = ExtResource("1_wm20p")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="Hurt_box" parent="." instance=ExtResource("3_d5byr")]
+collision_layer = 0
+collision_mask = 0
+
+[connection signal="area_entered" from="Hurt_box" to="." method="_on_hurt_box_area_entered"]
+
+[editable path="Hurt_box"]
