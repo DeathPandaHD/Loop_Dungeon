@@ -29,5 +29,4 @@ func receive_damage(base_damage):
 func _on_hurt_box_area_entered(hitbox):
 	receive_damage(hitbox.damage)
 	var base_damage= hitbox.damage
-	self.hp -= base_damage
 	print(hitbox.get_parent().name + "'s hitbox touched" + name + "'s hurtbox touched " +str(base_damage))
