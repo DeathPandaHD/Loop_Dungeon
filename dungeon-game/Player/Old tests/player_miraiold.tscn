@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bs2foaj73hr8m" path="res://Utilities/entities/playerbase.tscn" id="1_3lch6"]
 [ext_resource type="Texture2D" uid="uid://uyonbibxntoy" path="res://Textures/Player-Texture/mirai 5-20.png" id="2_wpdwc"]
-[ext_resource type="Script" uid="uid://ccfam71ah0mmd" path="res://Player/animation_system.gd" id="3_rcv0h"]
+[ext_resource type="Script" uid="uid://ccfam71ah0mmd" path="res://Player/Old tests/animation_system.gd" id="3_rcv0h"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rcv0h"]
 radius = 7.0
@@ -115,7 +115,6 @@ _data = {
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_52yw7"]
 
 [node name="Player_Mirai" instance=ExtResource("1_3lch6")]
-move_speed = 120.0
 
 [node name="Sprite2D" parent="." index="0"]
 texture_filter = 1

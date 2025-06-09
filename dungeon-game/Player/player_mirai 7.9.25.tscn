@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://o17d7bl2xkwh"]
+
+[ext_resource type="PackedScene" uid="uid://bs2foaj73hr8m" path="res://Utilities/entities/playerbase.tscn" id="1_gb7kt"]
+[ext_resource type="Texture2D" uid="uid://uyonbibxntoy" path="res://Textures/Player-Texture/mirai 5-20.png" id="2_3igym"]
+[ext_resource type="Script" uid="uid://c3pi1k725p3qv" path="res://Utilities/entities/states/player states/PlayerIdleState.gd" id="2_seln6"]
+[ext_resource type="Script" uid="uid://bna7pccnmjou3" path="res://Utilities/entities/states/player states/PlayerMovingState.gd" id="3_seln6"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8i8fm"]
+radius = 7.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jtqba"]
+radius = 9.0
+height = 20.0
+
+[node name="Player_mirai" instance=ExtResource("1_gb7kt")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture_filter = 1
+texture = ExtResource("2_3igym")
+hframes = 4
+vframes = 4
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, 9)
+shape = SubResource("CapsuleShape2D_8i8fm")
+
+[node name="CollisionShape2D" parent="Hit_box" index="0"]
+position = Vector2(43, 8)
+
+[node name="Hurt_box" parent="." index="4"]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" parent="Hurt_box" index="0"]
+position = Vector2(0, 14)
+shape = SubResource("CapsuleShape2D_jtqba")
+
+[node name="State Machine" parent="." index="5" node_paths=PackedStringArray("initial_state")]
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="State Machine" index="0"]
+script = ExtResource("2_seln6")
+
+[node name="Moving" type="Node" parent="State Machine" index="1"]
+script = ExtResource("3_seln6")
+
+[editable path="Hit_box"]
+[editable path="Hurt_box"]

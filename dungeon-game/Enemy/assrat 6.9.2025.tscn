@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=3 uid="uid://ddv7dti5qqws1"]
+
+[ext_resource type="PackedScene" uid="uid://6jax1aohw5vj" path="res://Utilities/entities/Enemybase.tscn" id="1_sm0sa"]
+[ext_resource type="Texture2D" uid="uid://bphrlyunli0uu" path="res://Textures/Enemies-Texture/Assrat.png" id="2_n3w1c"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wcd6y"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7wnct"]
+radius = 11.0
+height = 28.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wbak8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n3w1c"]
+radius = 129.314
+
+[node name="rat" node_paths=PackedStringArray("chase_node") instance=ExtResource("1_sm0sa")]
+collision_layer = 4
+collision_mask = 3
+chase_node = NodePath("State Machine/enemy_chase_state")
+
+[node name="Sprite2D" parent="." index="0"]
+texture_filter = 1
+texture = ExtResource("2_n3w1c")
+hframes = 2
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(-1, 5)
+shape = SubResource("CircleShape2D_wcd6y")
+
+[node name="Hit_box" parent="." index="3"]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="Hit_box" index="0"]
+position = Vector2(-1, 5)
+shape = SubResource("CapsuleShape2D_7wnct")
+
+[node name="Hurt_box" parent="." index="4"]
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape2D" parent="Hurt_box" index="0"]
+position = Vector2(-1, 4)
+shape = SubResource("CapsuleShape2D_wbak8")
+
+[node name="DetectionArea" parent="." index="6"]
+collision_layer = 4
+collision_mask = 2
+monitorable = false
+
+[node name="DetectionShape" parent="DetectionArea" index="0"]
+shape = SubResource("CircleShape2D_n3w1c")
+
+[connection signal="area_entered" from="DetectionArea" to="." method="_on_detection_area_area_entered"]
+[connection signal="area_exited" from="DetectionArea" to="." method="_on_detection_area_area_exited"]
+
+[editable path="Hit_box"]
+[editable path="Hurt_box"]

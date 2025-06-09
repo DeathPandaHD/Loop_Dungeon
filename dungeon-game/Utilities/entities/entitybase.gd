@@ -1,25 +1,27 @@
 extends CharacterBody2D
-signal hp_changed()
-@export var move_speed = 20.0
+#signal hp_changed()
+
 @export var hp_max = 100
 @export var hp = hp_max
 var direction : Vector2
-@export var speed = 75
+var is_dead : bool = false
+
 
 @onready var sprite = $Sprite2D
 @onready var collshape =$CollisionShape2D
 @onready var animplayer =$AnimationPlayer
 
-func _physics_process(delta):
-	move()
 
-func move():
-	direction = direction.normalized()
-	velocity = direction *  move_speed
-	move_and_slide()
 
-func die():
-	queue_free() 
+func _die():
+	if(is_dead):
+		return
+		
+	is_dead = true
+	#Remove/destroy this character once it's able to do so unless its the player
+	await get_tree().create_timer(1.0).timeout
+	if is_instance_valid(self) and not is_in_group("player"):
+		queue_free()
 	
 func receive_damage(base_damage):
 		var actual_damage = base_damage

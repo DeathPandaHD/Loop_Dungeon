@@ -1,5 +1,29 @@
-[gd_scene load_steps=2 format=3 uid="uid://6jax1aohw5vj"]
+[gd_scene load_steps=6 format=3 uid="uid://6jax1aohw5vj"]
 
 [ext_resource type="PackedScene" uid="uid://bi0441r5vuhdg" path="res://Utilities/entities/entityBase.tscn" id="1_r8xmy"]
+[ext_resource type="Script" uid="uid://cn5frdwrde8wa" path="res://Utilities/entities/enemybase.gd" id="2_qyakv"]
+[ext_resource type="Script" uid="uid://dko0f80xy3waj" path="res://Utilities/entities/states/enemy states/EnemyIdleState.gd" id="3_obsac"]
+[ext_resource type="Script" uid="uid://shhs7mkxir3h" path="res://Utilities/entities/states/enemy states/EnemyChaseState.gd" id="4_il4op"]
+[ext_resource type="Script" path="res://Utilities/entities/states/enemy states/EnemyDeathState.gd" id="7_r3f1n"]
 
 [node name="Enemybase" instance=ExtResource("1_r8xmy")]
+script = ExtResource("2_qyakv")
+
+[node name="State Machine" parent="." index="5" node_paths=PackedStringArray("initial_state")]
+initial_state = NodePath("enemy_idle_state")
+
+[node name="enemy_idle_state" type="Node" parent="State Machine" index="0"]
+script = ExtResource("3_obsac")
+
+[node name="enemy_chase_state" type="Node" parent="State Machine" index="1"]
+script = ExtResource("4_il4op")
+
+[node name="enemy_death_state" type="Node" parent="State Machine" index="2"]
+script = ExtResource("7_r3f1n")
+
+[node name="DetectionArea" type="Area2D" parent="." index="6"]
+
+[node name="DetectionShape" type="CollisionShape2D" parent="DetectionArea" index="0"]
+
+[editable path="Hit_box"]
+[editable path="Hurt_box"]
